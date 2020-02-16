@@ -3,14 +3,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-//import 'dart:async';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:ku/Storage.dart';
-import 'package:ku/signin.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -36,7 +34,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    List ti;
     print("Token Printed!!!");
     Storage userData = new Storage("user.json");
     userData.readData().then((String uData) {
@@ -118,6 +115,9 @@ class _HomeState extends State<Home> {
                   color: Colors.transparent,
                 ),
                 hourMinuteDigitDecoration: BoxDecoration(
+                  border: Border.all(color: Colors.transparent)
+                ),
+                secondDigitDecoration: BoxDecoration(
                   border: Border.all(color: Colors.transparent)
                 ),
                 hourMinuteDigitTextStyle: TextStyle(

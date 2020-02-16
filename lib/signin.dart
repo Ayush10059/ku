@@ -4,9 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart';
-import 'package:ku/Home.dart';
 import 'package:ku/loading.dart';
-import 'package:ku/Register.dart';
 
 import 'package:ku/Storage.dart';
 
@@ -48,7 +46,7 @@ class _SignInState extends State<SignIn> {
   String code = '';
   String errorRegister = '';
 
-  Future<File> getData() async {
+  getData() async {
     Map<String, String> headers = {"Content-type": "application/json"};
 
     String body = '{"pass": "' + pass.trim() + '", "code": "' + code.trim() + '"}';
@@ -68,12 +66,12 @@ class _SignInState extends State<SignIn> {
         loading = false;
       });
       print(resp);
+      Navigator.pushNamed(context, '/App');
     }
     String dataToStore = response.body.toString();
     print(dataToStore);
     Storage user = new Storage("user.json");
     user.writeData(dataToStore);
-    Navigator.pushNamed(context, '/App');
   }
 
     @override
@@ -83,15 +81,13 @@ class _SignInState extends State<SignIn> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.green[400],
-            title: Text('Log In to KU-Connect'),
+            title: Text('Log In'),
             actions: <Widget>[
               FlatButton.icon(
                   icon: Icon(Icons.person_add),
                   label: Text('Register'),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Register()),
+                    Navigator.pushNamed(context, '/register',
                     );
                   }
               )
@@ -99,7 +95,7 @@ class _SignInState extends State<SignIn> {
           ),
 
           body: Container(
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+            padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 50.0),
             child: Form(
               key: _formKey,
               child: Column(
@@ -146,11 +142,8 @@ class _SignInState extends State<SignIn> {
                   ),
                   SizedBox(height: 20.0),
                   RaisedButton(
-                    color: Colors.red,
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    color: Colors.redAccent[100],
+                    child: Text('Sign In'),
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         setState(()=> loading = true);

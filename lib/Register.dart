@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:ku/Storage.dart';
 import 'package:ku/loading.dart';
 import 'package:http/http.dart';
 
@@ -59,7 +60,7 @@ class _RegisterState extends State<Register> {
       ),
 
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
         child: Form(
 
           child: Column(
@@ -98,11 +99,8 @@ class _RegisterState extends State<Register> {
 
               SizedBox(height: 20.0),
               RaisedButton(
-                color: Colors.red,
-                child: Text(
-                  'Register',
-                  style: TextStyle(color: Colors.white),
-                ),
+                color: Colors.redAccent[100],
+                child: Text('Register'),
                 onPressed: (){
                 getData();
                 }

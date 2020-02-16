@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
@@ -28,5 +30,14 @@ class Storage {
   Future<File> writeData(String data) async {
     final file = await localFile;
     return file.writeAsString("$data");
+  }
+  Future<Map<String, dynamic>> getParsedData() async {
+    String s = await readData();
+    try {
+      return jsonDecode(s);
+    } catch (e) {
+      String errMsg = e.toString();
+      return jsonDecode('"error" : $errMsg');
+    }
   }
 }
